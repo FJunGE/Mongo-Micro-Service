@@ -1,0 +1,107 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Mongo Micro Service API Documentation",
+        "version": "1.0"
+    },
+    "servers": [
+        {
+            "url": "http://192.168.10.46:9099/v0/"
+        }
+    ],
+    "paths": {
+        "/version": {
+            "get": {
+                "tags": [
+                    "version"
+                ],
+                "summary": "Get framework version",
+                "operationId": "App\\Http\\Controllers\\ExampleController::version",
+                "responses": {
+                    "200": {
+                        "description": "Successful response"
+                    }
+                }
+            }
+        },
+        "/productlog/{productID}": {
+            "get": {
+                "tags": [
+                    "product log"
+                ],
+                "summary": "Get a product log data by productID",
+                "operationId": "findByProductID",
+                "parameters": [
+                    {
+                        "name": "productID",
+                        "in": "path",
+                        "description": "Such as: 123",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "product log data"
+                    }
+                }
+            }
+        },
+        "/productlog/create": {
+            "post": {
+                "tags": [
+                    "product log"
+                ],
+                "summary": "Add a new product log data",
+                "description": "",
+                "operationId": "App\\Http\\Controllers\\ProductlogController::create",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "admin": {
+                                        "type": "string"
+                                    },
+                                    "brief": {
+                                        "type": "string"
+                                    },
+                                    "details": {
+                                        "type": "string"
+                                    },
+                                    "productID": {
+                                        "type": "string"
+                                    },
+                                    "remark": {
+                                        "type": "string"
+                                    },
+                                    "date": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "return inserted data"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "bearerFormat": "JWT",
+                "scheme": "bearer"
+            }
+        }
+    }
+}
