@@ -6,7 +6,7 @@
     },
     "servers": [
         {
-            "url": "http://192.168.10.46:9099/v0/"
+            "url": "http://csprd-mongo.crazysales.com.au/v0/"
         }
     ],
     "paths": {
