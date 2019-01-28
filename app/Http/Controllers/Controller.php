@@ -5,9 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Laravel\Lumen\Routing\Controller as BaseController;
 use Illuminate\Validation\ValidationException;
+//http://csprd-mongo.crazysales.com.au
 /**
  *@OA\Info(title="Mongo Micro Service API Documentation", version="1.0")
- *@OA\Server(url="http://192.168.10.46:9099/v0/")
+ *@OA\Server(url="http://csprd-mongo.crazysales.com.au/v0/")
  *@OA\SecurityScheme(
  *   securityScheme="bearerAuth",
  *   type="http",

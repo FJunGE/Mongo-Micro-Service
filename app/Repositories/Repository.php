@@ -24,7 +24,7 @@ abstract class Repository implements RepositoryInterface {
 
     /**
      * @param App $app
-     * @throws \Bosnadev\Repositories\Exceptions\RepositoryException
+     * @throws \App\Repositories\RepositoryException
      */
     public function __construct(App $app) {
         $this->app = $app;

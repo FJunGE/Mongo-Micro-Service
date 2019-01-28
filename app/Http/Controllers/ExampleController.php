@@ -24,7 +24,7 @@ class ExampleController extends Controller
      */
     public function version()
     {
-        return phpinfo();//app()->version();
+        return app()->version();
     }
 
     //
