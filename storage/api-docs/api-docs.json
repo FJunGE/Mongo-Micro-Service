@@ -24,7 +24,7 @@
                 }
             }
         },
-        "/productlog/{productID}": {
+        "/productlog/{productID}?skip={skip}&take={take}": {
             "get": {
                 "tags": [
                     "product log"
@@ -39,6 +39,24 @@
                         "required": true,
                         "schema": {
                             "type": "string"
+                        }
+                    },
+                    {
+                        "name": "skip",
+                        "in": "query",
+                        "description": "Numbers ,default is 0",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "take",
+                        "in": "query",
+                        "description": "Numbers ,default is all",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
                         }
                     }
                 ],
