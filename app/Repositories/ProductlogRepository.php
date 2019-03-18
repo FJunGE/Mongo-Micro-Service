@@ -17,10 +17,20 @@ class ProductlogRepository extends Repository {
 
     /**
      * @param $productID
+     * @return mixed
+     */
+    public function getProductCount($productID){
+        return $this->model->where('productID', '=', $productID)->count();
+    }
+
+
+    /**
+     * @param $productID
      * @param array $columns
      * @return mixed
      */
-    public function findByProductID($productID, $columns = array('*')) {
-        return $this->model->where('productID', '=', $productID)->get($columns);
+    public function findByProductID($productID, $skip, $take, $columns = array('*')) {
+        return $this->model->where('productID', '=', $productID)->limit($take)->offset($skip)->get($columns);
+
     }
 }

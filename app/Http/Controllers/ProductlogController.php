@@ -37,7 +37,7 @@ class ProductlogController extends Controller
     }
 
     /**
-     * @OA\Get(path="/productlog/{productID}",
+     * @OA\Get(path="/productlog/{productID}?skip={skip}&take={take}",
      *   tags={"product log"},
      *   summary="Get a product log data by productID",
      *   operationId="findByProductID",
@@ -47,12 +47,27 @@ class ProductlogController extends Controller
      *     description="Such as: 123",
      *     @OA\Schema(type="string")
      *   ),
+     *     @OA\Parameter(name="skip",
+     *     in="query",
+     *     description="Numbers ,default is 0",
+     *     @OA\Schema(type="integer",format="int32")
+     *   ),
+     *     @OA\Parameter(name="take",
+     *     in="query",
+     *     description="Numbers ,default is all",
+     *     @OA\Schema( type="integer",format="int32")
+     *   ),
      *   @OA\Response(response="200", description="product log data")
      * )
      */
     public function findByProductID($productID)
     {
-        return $this->responseJson(HTTP_CODE_OK,HTTP_CODE_OK_STR,$this->productlog->findByProductID($productID));
+        return $this->responseJson(
+            HTTP_CODE_OK,
+            HTTP_CODE_OK_STR,
+            $this->productlog->getProductCount($productID),
+            $this->productlog->findByProductID($productID,(int)$this->request->skip,(int)$this->request->take)
+        );
     }
 
     /**
@@ -93,7 +108,7 @@ class ProductlogController extends Controller
             return $this->responseJson($statusCode,$statusText);
         }
 
-        return $this->responseJson(HTTP_CODE_OK,HTTP_CODE_OK_STR,$this->productlog->create($this->request->all()));
+        return $this->responseJson(HTTP_CODE_OK,HTTP_CODE_OK_STR,'',$this->productlog->create($this->request->all()));
     }
 
 }
