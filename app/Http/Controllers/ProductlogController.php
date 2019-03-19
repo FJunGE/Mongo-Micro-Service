@@ -45,11 +45,11 @@ class ProductlogController extends Controller
      *     in="path",
      *     required=true,
      *     description="Such as: 123",
-     *     @OA\Schema(type="string")
+     *     @OA\Schema(type="integer",format="int32")
      *   ),
      *     @OA\Parameter(name="skip",
      *     in="query",
-     *     description="Numbers ,default is 0",
+     *     description="Numbers ,default is 1",
      *     @OA\Schema(type="integer",format="int32")
      *   ),
      *     @OA\Parameter(name="take",
@@ -62,6 +62,18 @@ class ProductlogController extends Controller
      */
     public function findByProductID($productID)
     {
+        $integerRegex = "/^[1-9]\d*$/";
+
+        list($statusCode,$statusText) = $this->validateRequest($this->request,[
+            'skip'  =>  "regex:{$integerRegex}",
+            'take'  => "regex:{$integerRegex}"
+        ], [
+            'skip.regex'=>'Skip Must be a positive integer',
+            'take.regex'=>'Take Must be a positive integer',
+        ]);
+        if ($statusCode != HTTP_CODE_OK){
+            return $this->responseJson($statusCode,$statusText);
+        }
         return $this->responseJson(
             HTTP_CODE_OK,
             HTTP_CODE_OK_STR,

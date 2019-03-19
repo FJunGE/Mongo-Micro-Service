@@ -18,7 +18,7 @@ use Illuminate\Validation\ValidationException;
  */
 class Controller extends BaseController
 {
-    public function responseJson($customerCode,$message,$total,$data = [] ,$statusCode = 200, $header=array())
+    public function responseJson($customerCode,$message,$total=0,$data = [] ,$statusCode = 200, $header=array())
     {
         return response()->json([
             'total' => $total,

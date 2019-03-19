@@ -38,13 +38,14 @@
                         "description": "Such as: 123",
                         "required": true,
                         "schema": {
-                            "type": "string"
+                            "type": "integer",
+                            "format": "int32"
                         }
                     },
                     {
                         "name": "skip",
                         "in": "query",
-                        "description": "Numbers ,default is 0",
+                        "description": "Numbers ,default is 1",
                         "schema": {
                             "type": "integer",
                             "format": "int32"
