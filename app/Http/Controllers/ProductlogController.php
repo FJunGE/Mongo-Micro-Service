@@ -62,23 +62,13 @@ class ProductlogController extends Controller
      */
     public function findByProductID($productID)
     {
-        $integerRegex = "/^[1-9]\d*$/";
-
-        list($statusCode,$statusText) = $this->validateRequest($this->request,[
-            'skip'  =>  "regex:{$integerRegex}",
-            'take'  => "regex:{$integerRegex}"
-        ], [
-            'skip.regex'=>'Skip Must be a positive integer',
-            'take.regex'=>'Take Must be a positive integer',
-        ]);
-        if ($statusCode != HTTP_CODE_OK){
-            return $this->responseJson($statusCode,$statusText);
-        }
+        $skip = ((int)$this->request->skip <= 0) ? null : (int)$this->request->skip;
+        $take = ((int)$this->request->take <= 0) ? null : (int)$this->request->take;
         return $this->responseJson(
             HTTP_CODE_OK,
             HTTP_CODE_OK_STR,
             $this->productlog->getProductCount($productID),
-            $this->productlog->findByProductID($productID,(int)$this->request->skip,(int)$this->request->take)
+            $this->productlog->findByProductID($productID,$skip,$take)
         );
     }
 
